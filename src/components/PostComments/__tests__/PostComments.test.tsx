@@ -17,5 +17,22 @@ describe('Teste para o componente PostComment', () => {
         })
         fireEvent.click(screen.getByTestId('btn-comentar'))
         expect(screen.getByText('legal')).toBeTruthy()
+    });
+
+    test('Deve adcionar dois posts', () => {
+        render(<Post />);
+        fireEvent.change(screen.getByTestId('campo-comentar'), {
+            target: {
+                value: 'gostei'
+            }
+        })
+        fireEvent.click(screen.getByTestId('btn-comentar'))
+        fireEvent.change(screen.getByTestId('campo-comentar'), {
+            target: {
+                value: 'like'
+            }
+        })
+        fireEvent.click(screen.getByTestId('btn-comentar'))
+        expect(screen.getByText('like') && screen.getByText('gostei')).toBeInTheDocument()
     })
 });
